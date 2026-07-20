@@ -271,6 +271,8 @@ class GeneralMotionRetargeting:
         for body_name in human_data.keys():
             pos, quat = human_data[body_name]
             offset_human_data[body_name] = [pos, quat]
+            if body_name not in pos_offsets or body_name not in rot_offsets:
+                continue
             # apply rotation offset first
             updated_quat = (R.from_quat(quat, scalar_first=True) * rot_offsets[body_name]).as_quat(scalar_first=True)
             offset_human_data[body_name][1] = updated_quat

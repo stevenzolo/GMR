@@ -1,8 +1,8 @@
 import pathlib
 
-HERE = pathlib.Path(__file__).parent
+HERE = pathlib.Path(__file__).resolve().parent
 IK_CONFIG_ROOT = HERE / "ik_configs"
-ASSET_ROOT = HERE / ".." / "assets"
+ASSET_ROOT = (HERE.parent / "assets").resolve()
 
 ROBOT_XML_DICT = {
     "unitree_g1": ASSET_ROOT / "unitree_g1" / "g1_mocap_29dof.xml",
@@ -61,6 +61,27 @@ IK_CONFIG_DICT = {
     "bvh_xsens":{
         "unitree_g1": IK_CONFIG_ROOT / "bvh_xsens_to_g1.json",
         "unitree_h1_2": IK_CONFIG_ROOT / "bvh_xsens_to_h1_2.json",
+    },
+    "bvh_noitom":{
+        "unitree_g1": IK_CONFIG_ROOT / "noi_to_g1.json",
+    },
+    "bvh_noi":{
+        "unitree_g1": IK_CONFIG_ROOT / "noi_to_g1.json",
+    },
+    "bvh_motive5spine":{
+        "unitree_g1": IK_CONFIG_ROOT / "motive5spine_to_g1.json",
+    },
+    "bvh_motive_5spine":{
+        "unitree_g1": IK_CONFIG_ROOT / "motive5spine_to_g1.json",
+    },
+    "bvh_motive2spine":{
+        "unitree_g1": IK_CONFIG_ROOT / "motive2spine_to_g1.json",
+    },
+    "bvh_motive_2spine":{
+        "unitree_g1": IK_CONFIG_ROOT / "motive2spine_to_g1.json",
+    },
+    "bvh_vicon":{
+        "unitree_g1": IK_CONFIG_ROOT / "vicon_to_g1.json",
     },
     "fbx":{
         "unitree_g1": IK_CONFIG_ROOT / "fbx_to_g1.json",

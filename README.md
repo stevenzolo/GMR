@@ -323,24 +323,26 @@ python scripts/gvhmr_to_robot.py --gvhmr_pred_file <path_to_hmr4d_results.pt> --
 
 
 
-## Retargeting from BVH (LAFAN1, Nokov) to Robot
+## Retargeting from BVH to Robot
 
 Retarget a single motion:
 
 ```bash
 # single motion
-python scripts/bvh_to_robot.py --bvh_file <path_to_bvh_data> --robot <path_to_robot_data> --save_path <path_to_save_robot_data.pkl> --rate_limit --format <format>
+python scripts/bvh_to_robot.py --input <path_to_bvh_data> --output <path_to_save_robot_data.pkl> --robot <robot_name> --format <format>
 ```
 
 By default you should see the visualization of the retargeted robot motion in a mujoco window. 
+- `--input` / `--bvh_file` is used to specify the BVH file.
+- `--output` / `--save_path` is used to save a retargeted robot motion pickle. Output-only runs skip the MuJoCo viewer unless `--visualize` is passed.
 - `--rate_limit` is used to limit the rate of the retargeted robot motion to keep the same as the human motion. If you want it as fast as possible, remove `--rate_limit`.
-- `--format` is used to specify the format of the BVH data. Supported formats are `lafan1` and `nokov`.
+- `--format` is used to specify the format of the BVH data. Supported formats are `lafan1`, `nokov`, `noitom`, `motive5spine`, `motive2spine`, and `vicon`.
 
 
 Retarget a folder of motions:
 
 ```bash
-python scripts/bvh_to_robot_dataset.py --src_folder <path_to_dir_of_bvh_data> --tgt_folder <path_to_dir_to_save_robot_data> --robot <robot_name>
+python scripts/bvh_to_robot_dataset.py --src_folder <path_to_dir_of_bvh_data> --tgt_folder <path_to_dir_to_save_robot_data> --robot <robot_name> --format <format>
 ```
 
 By default there is no visualization for batch retargeting.

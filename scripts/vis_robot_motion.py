@@ -3,6 +3,9 @@ import argparse
 import os
 from tqdm import tqdm
 
+if RobotMotionViewer is None:
+    raise ImportError("RobotMotionViewer could not be imported. Check viewer dependencies.")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--robot", type=str, default="unitree_g1")
@@ -21,7 +24,9 @@ if __name__ == "__main__":
     if not os.path.exists(robot_motion_path):
         raise FileNotFoundError(f"Motion file {robot_motion_path} not found")
     
-    motion_data, motion_fps, motion_root_pos, motion_root_rot, motion_dof_pos, motion_local_body_pos, motion_link_body_list = load_robot_motion(robot_motion_path)
+    motion_data, motion_fps, motion_root_pos, motion_root_rot, motion_dof_pos, motion_local_body_pos, motion_link_body_list = load_robot_motion(
+        robot_motion_path, robot_type=robot_type
+    )
     
     env = RobotMotionViewer(robot_type=robot_type,
                             motion_fps=motion_fps,

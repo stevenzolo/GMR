@@ -5,9 +5,22 @@ import mujoco.viewer as mjv
 import imageio
 from scipy.spatial.transform import Rotation as R
 from general_motion_retargeting import ROBOT_XML_DICT, ROBOT_BASE_DICT, VIEWER_CAM_DISTANCE_DICT
-from loop_rate_limiters import RateLimiter
 import numpy as np
 from rich import print
+
+try:
+    from loop_rate_limiters import RateLimiter
+except ImportError:
+    class RateLimiter:
+        def __init__(self, frequency, warn=False):
+            self.period = 1.0 / frequency
+            self.next_time = time.time() + self.period
+
+        def sleep(self):
+            now = time.time()
+            if self.next_time > now:
+                time.sleep(self.next_time - now)
+            self.next_time = max(self.next_time + self.period, time.time())
 
 
 def draw_frame(
